@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.showImage = i => {
     currentIndex = i;
-    document.getElementById("mainImage").src = images[currentIndex];
+document.getElementById("mainImage").src = images[currentIndex];
   };
 
   window.nextImg = () => {
