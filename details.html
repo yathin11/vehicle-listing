@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Vehicle Details</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,18 +13,43 @@
   <h1>Vehicle Details</h1>
 </header>
 
-<section class="details-container">
-  <!-- IMAGE / CAROUSEL -->
+<section class="details-container poster">
+
+  <!-- IMAGE CAROUSEL -->
   <div class="image-wrapper">
     <div class="image-section">
       <button class="nav left" onclick="prevImg()">❮</button>
-      <img id="mainImage" onclick="openZoom()" />
+      <img id="mainImage" onclick="openZoom()">
       <button class="nav right" onclick="nextImg()">❯</button>
     </div>
   </div>
 
   <!-- DETAILS -->
-  <div class="details-box" id="details"></div>
+  <div class="details-box">
+
+    <h2 id="title"></h2>
+
+    <div class="info-grid">
+      <div class="left">
+        <p><strong>Owner:</strong> <span id="owners"></span></p>
+        <p><strong>Fuel:</strong> <span id="fuel"></span></p>
+        <p><strong>Surrender:</strong> <span id="surrender"></span></p>
+        <p><strong>Sale Code:</strong> <span id="sale_code"></span></p>
+        <p class="price-big">₹ <span id="price"></span></p>
+      </div>
+
+      <div class="right">
+        <p><strong>IC:</strong> <span id="ic"></span></p>
+        <p><strong>FC:</strong> <span id="fc"></span></p>
+        <p><strong>Tax:</strong> <span id="tax"></span></p>
+        <p><strong>Contact:</strong> <span id="contact"></span></p>
+      </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨 Print</button>
+
+  </div>
+
 </section>
 
 <!-- ZOOM MODAL -->
