@@ -51,6 +51,44 @@
         <p><strong>Contact:</strong> <span id="contact"></span></p>
       </div>
     </div>
+      <!-- AUCTION SECTION -->
+<div id="auctionBox" style="display:none; margin-top:20px">
+
+  <button id="reserveBtn" class="print-btn" onclick="openReserve()">
+    🔒 Reserve Vehicle
+  </button>
+
+  <button id="bidBtn" class="print-btn" style="display:none" onclick="openBid()">
+    💰 Place Bid
+  </button>
+
+</div>
+
+<!-- AUCTION MODAL -->
+<div id="auctionModal" class="modal" style="display:none">
+  <div class="modal-box">
+
+    <h3 id="modalTitle"></h3>
+
+    <!-- MANAGER NAME DROPDOWN -->
+    <select id="managerSelect">
+      <option value="">Select your name</option>
+    </select>
+
+    <!-- BID AMOUNT (only for bidding) -->
+    <input
+      id="amount"
+      type="number"
+      placeholder="Enter bid amount"
+      style="display:none"
+    >
+
+    <button onclick="submitAuction()">Submit</button>
+    <button onclick="closeModal()">Cancel</button>
+
+  </div>
+</div>
+
 
     <button class="print-btn" onclick="window.print()">🖨 Print</button>
 
