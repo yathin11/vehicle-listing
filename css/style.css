@@ -156,3 +156,11 @@ body {
     background: #fff;
   }
 }
+
+
+.price-big {
+  font-size: 22px;
+  font-weight: 700;
+  color: #dc2626; /* red like OLX */
+  margin-top: 12px;
+}
