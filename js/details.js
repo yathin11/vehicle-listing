@@ -13,32 +13,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const v = data.find(item => item.id === id);
       if (!v) return;
 
-      /* ---------- IMAGES ---------- */
       images = [v.img1, v.img2, v.img3, v.img4, v.img5].filter(Boolean);
       if (images.length) showImage(0);
 
-      /* ---------- TITLE ---------- */
       document.getElementById("title").innerText = v.make;
 
-      /* ---------- LEFT COLUMN ---------- */
+      // LEFT
       document.getElementById("regno").innerText = v.id;
       document.getElementById("owners").innerText = v.owners;
       document.getElementById("fuel").innerText = v.fuel;
       document.getElementById("surrender").innerText = v.surrender_status;
       document.getElementById("sale_code").innerText = v.sale_code;
+      document.getElementById("price").innerText = v.sale_price;
 
-      /* ---------- RIGHT COLUMN ---------- */
+      // RIGHT
       document.getElementById("model").innerText = v.model;
       document.getElementById("ic").innerText = v.ic;
       document.getElementById("fc").innerText = v.fc;
       document.getElementById("tax").innerText = v.tax;
       document.getElementById("contact").innerText = v.contact;
-
-      /* ---------- PRICE ---------- */
-      document.getElementById("price").innerText = `₹ ${v.sale_price}`;
     });
 
-  /* ---------- IMAGE CONTROLS ---------- */
   window.showImage = i => {
     currentIndex = i;
     document.getElementById("mainImage").src = images[currentIndex];
@@ -54,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showImage(currentIndex);
   };
 
-  /* ---------- ZOOM ---------- */
   window.openZoom = () => {
     document.getElementById("zoomImg").src =
       document.getElementById("mainImage").src;
