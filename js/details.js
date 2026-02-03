@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ================= CONFIG ================= */
 
-  const SHEET_URL ="https://opensheet.elk.sh/1eXfETDikq3Q4addN_0OugOBjkOu_L3VXrUDO_oXt9Qo/Sheet1";
+  const SHEET_URL =
+    "https://opensheet.elk.sh/1eXfETDikq3Q4addN_0OugOBjkOu_L3VXrUDO_oXt9Qo/Sheet1";
 
-  const APPS_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbxrNkC8p-GRp45Ulccfsga-cN0dTHV95k_Fl70O70qYPwUoJdaInL12mcRrs6STugbW/exec";
+  const APPS_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxrNkC8p-GRp45Ulccfsga-cN0dTHV95k_Fl70O70qYPwUoJdaInL12mcRrs6STugbW/exec";
+
+  /* ================= STATE ================= */
+
   const id = new URLSearchParams(window.location.search).get("id");
 
   let vehicle = null;
@@ -11,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let auctionMode = "OFF";
 
+  /* ================= FETCH DATA ================= */
 
   fetch(SHEET_URL)
     .then(res => res.json())
@@ -20,6 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!vehicle) return;
 
       auctionMode = (vehicle.auction_mode || "OFF").toUpperCase();
+
+      /* ---------- SALE TITLE ---------- */
+      const saleTitle = data[0]?.sale_title || "";
+      document.getElementById("saleTitle").innerText = saleTitle;
 
       /* ---------- IMAGES ---------- */
       images = [
@@ -51,12 +62,33 @@ document.addEventListener("DOMContentLoaded", () => {
       contact.innerText = vehicle.contact;
 
       /* ---------- AUCTION UI ---------- */
-      if (auctionMode === "ON") {
-        auctionBox.style.display = "block";
-      } else {
-        auctionBox.style.display = "none";
-      }
+      handleAuctionUI();
     });
+
+  /* ================= AUCTION UI ================= */
+
+  function handleAuctionUI() {
+    const auctionBox = document.getElementById("auctionBox");
+    const reserveBtn = document.getElementById("reserveBtn");
+    const bidBtn = document.getElementById("bidBtn");
+
+    if (auctionMode !== "ON") {
+      auctionBox.style.display = "none";
+      return;
+    }
+
+    auctionBox.style.display = "block";
+
+    const reservedBy = (vehicle.reserved_by || "").trim();
+
+    if (!reservedBy) {
+      reserveBtn.style.display = "block";
+      bidBtn.style.display = "none";
+    } else {
+      reserveBtn.style.display = "none";
+      bidBtn.style.display = "block";
+    }
+  }
 
   /* ================= MODAL ================= */
 
@@ -107,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(() => {
         alert("Submitted successfully");
         closeModal();
-        location.reload(); // refresh to show updated state
+        location.reload(); // refresh to update buttons
       })
       .catch(() => {
         alert("Submission failed. Please try again.");

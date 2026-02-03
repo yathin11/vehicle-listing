@@ -15,6 +15,11 @@ fetch(SHEET_URL)
 
     renderCards(allVehicles);
   });
+// GLOBAL SALE TITLE
+if (allVehicles.length && allVehicles[0].sale_title) {
+  document.getElementById("saleTitle").innerText =
+    allVehicles[0].sale_title;
+}
 
 function renderCards(vehicles) {
   const container = document.getElementById("vehicleList");

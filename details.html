@@ -10,18 +10,23 @@
 
 <header class="top-bar">
   <a href="index.html" class="back-btn">← Back</a>
-  <h1 id="saleTitle">Vehicle Details</h1>
+
+  <!-- SALE TITLE FROM SHEET -->
+  <h1 id="saleTitle" style="margin-left:15px;"></h1>
 </header>
 
 <section class="details-container">
 
+  <!-- IMAGE -->
   <div class="image-section">
     <button class="nav left" onclick="prevImg()">❮</button>
     <img id="mainImage" onclick="openZoom()">
     <button class="nav right" onclick="nextImg()">❯</button>
   </div>
 
+  <!-- DETAILS -->
   <div class="details-box">
+
     <h2 id="title"></h2>
 
     <div class="info-grid">
@@ -45,15 +50,30 @@
 
     <!-- AUCTION -->
     <div id="auctionBox" style="display:none; margin-top:15px">
-      <button class="print-btn" onclick="openReserve()">🔒 Reserve Vehicle</button>
-      <button class="print-btn" onclick="openBid()">💰 Place Bid</button>
+
+      <button
+        id="reserveBtn"
+        class="print-btn"
+        onclick="openReserve()">
+        🔒 Reserve Vehicle
+      </button>
+
+      <button
+        id="bidBtn"
+        class="print-btn"
+        onclick="openBid()">
+        💰 Place Bid
+      </button>
+
     </div>
 
     <button class="print-btn" onclick="window.print()">🖨 Print</button>
+
   </div>
 
 </section>
 
+<!-- ZOOM -->
 <div id="zoomModal" onclick="closeZoom()">
   <img id="zoomImg">
 </div>
