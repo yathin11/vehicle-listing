@@ -68,26 +68,24 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ================= AUCTION UI ================= */
 
   function handleAuctionUI() {
-    const auctionBox = document.getElementById("auctionBox");
     const reserveBtn = document.getElementById("reserveBtn");
-    const bidBtn = document.getElementById("bidBtn");
+const bidBtn = document.getElementById("bidBtn");
 
-    if (auctionMode !== "ON") {
-      auctionBox.style.display = "none";
-      return;
-    }
+if (auctionMode === "ON") {
+  auctionBox.style.display = "block";
 
-    auctionBox.style.display = "block";
+  if (vehicle.reserved_by && vehicle.reserved_by.trim() !== "") {
+    reserveBtn.style.display = "none";
+    bidBtn.style.display = "block";
+  } else {
+    reserveBtn.style.display = "block";
+    bidBtn.style.display = "none";
+  }
 
-    const reservedBy = (vehicle.reserved_by || "").trim();
+} else {
+  auctionBox.style.display = "none";
+}
 
-    if (!reservedBy) {
-      reserveBtn.style.display = "block";
-      bidBtn.style.display = "none";
-    } else {
-      reserveBtn.style.display = "none";
-      bidBtn.style.display = "block";
-    }
   }
 
   /* ================= MODAL ================= */
