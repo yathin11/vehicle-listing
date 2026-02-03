@@ -7,6 +7,12 @@ fetch(SHEET_URL)
   .then(res => res.json())
   .then(data => {
     allVehicles = data;
+
+    // Dynamic sale title
+    if (data.length && data[0].sale_title) {
+      document.getElementById("saleTitle").innerText = data[0].sale_title;
+    }
+
     renderCards(allVehicles);
   });
 
@@ -18,8 +24,9 @@ function renderCards(vehicles) {
     const card = document.createElement("div");
     card.className = "card";
 
-    const vehicleName = `${v.make} ${v.model}`.toLowerCase();
-    card.dataset.name = vehicleName;
+    // Search: make + model + reg no
+    card.dataset.search =
+      `${v.make} ${v.model} ${v.id}`.toLowerCase();
 
     card.onclick = () => {
       window.location.href = `details.html?id=${v.id}`;
@@ -29,7 +36,7 @@ function renderCards(vehicles) {
       <img src="${v.img1}">
       <div class="card-body">
         <h3>${v.make} ${v.model}</h3>
-        <div class="price">₹ ${v.sale_price}</div>
+        <div class="price">${v.sale_price}</div>
         <div class="meta">${v.fuel} • ${v.owners}</div>
       </div>
     `;
@@ -39,13 +46,10 @@ function renderCards(vehicles) {
 }
 
 function filterVehicles() {
-  const query = document
-    .getElementById("searchInput")
-    .value
-    .toLowerCase();
-
+  const query = document.getElementById("searchInput").value.toLowerCase();
   document.querySelectorAll(".card").forEach(card => {
-    const name = card.dataset.name;
-    card.style.display = name.includes(query) ? "block" : "none";
+    card.style.display = card.dataset.search.includes(query)
+      ? "block"
+      : "none";
   });
 }

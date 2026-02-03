@@ -9,22 +9,19 @@
 <body>
 
 <header class="top-bar">
-  <h1>Vehicle Listing</h1>
+  <h1 id="saleTitle">Vehicle Listing</h1>
 </header>
 
-<!-- SEARCH BAR -->
 <div class="search-bar">
   <input
     type="text"
     id="searchInput"
-    placeholder="Search vehicle (eg: Maruti Dzire)"
+    placeholder="Search by name or reg no (TN07BU6976)"
     onkeyup="filterVehicles()"
   >
 </div>
 
-<section class="container" id="vehicleList">
-  <!-- Cards injected by JS -->
-</section>
+<section class="container" id="vehicleList"></section>
 
 <script src="js/list.js"></script>
 </body>

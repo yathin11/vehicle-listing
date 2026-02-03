@@ -1,15 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ================= CONFIG ================= */
 
-  const SHEET_URL =
-    "https://opensheet.elk.sh/1eXfETDikq3Q4addN_0OugOBjkOu_L3VXrUDO_oXt9Qo/Sheet1";
+  const SHEET_URL ="https://opensheet.elk.sh/1eXfETDikq3Q4addN_0OugOBjkOu_L3VXrUDO_oXt9Qo/Sheet1";
 
-  // 🔗 Google Apps Script Web App URL
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgNl1AaOe6_dk9zAvBcsqI5C2TjrDNgHwqiiycfeuzFoFQHXFYJlSK-ZeJrrGlfk3T/exec";
-
-  /* ================= STATE ================= */
-
+  const APPS_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbxrNkC8p-GRp45Ulccfsga-cN0dTHV95k_Fl70O70qYPwUoJdaInL12mcRrs6STugbW/exec";
   const id = new URLSearchParams(window.location.search).get("id");
 
   let vehicle = null;
@@ -17,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let auctionMode = "OFF";
 
-  /* ================= FETCH DATA ================= */
 
   fetch(SHEET_URL)
     .then(res => res.json())
@@ -43,77 +36,52 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("title").innerText = vehicle.make;
 
       /* ---------- LEFT COLUMN ---------- */
-      document.getElementById("regno").innerText = vehicle.id;
-      document.getElementById("owners").innerText = vehicle.owners;
-      document.getElementById("fuel").innerText = vehicle.fuel;
-      document.getElementById("surrender").innerText = vehicle.surrender_status;
-      document.getElementById("sale_code").innerText = vehicle.sale_code;
-      document.getElementById("price").innerText = vehicle.sale_price;
+      regno.innerText = vehicle.id;
+      owners.innerText = vehicle.owners;
+      fuel.innerText = vehicle.fuel;
+      surrender.innerText = vehicle.surrender_status;
+      sale_code.innerText = vehicle.sale_code;
+      price.innerText = vehicle.sale_price;
 
       /* ---------- RIGHT COLUMN ---------- */
-      document.getElementById("model").innerText = vehicle.model;
-      document.getElementById("ic").innerText = vehicle.ic;
-      document.getElementById("fc").innerText = vehicle.fc;
-      document.getElementById("tax").innerText = vehicle.tax;
-      document.getElementById("contact").innerText = vehicle.contact;
-
-      /* ---------- MANAGER LIST ---------- */
-      const select = document.getElementById("managerSelect");
-      select.innerHTML = `<option value="">Select your name</option>`;
-
-      (vehicle.manager_list || "")
-        .split(",")
-        .map(n => n.trim())
-        .filter(Boolean)
-        .forEach(name => {
-          const opt = document.createElement("option");
-          opt.value = name;
-          opt.textContent = name;
-          select.appendChild(opt);
-        });
+      model.innerText = vehicle.model;
+      ic.innerText = vehicle.ic;
+      fc.innerText = vehicle.fc;
+      tax.innerText = vehicle.tax;
+      contact.innerText = vehicle.contact;
 
       /* ---------- AUCTION UI ---------- */
-      handleAuctionUI();
+      if (auctionMode === "ON") {
+        auctionBox.style.display = "block";
+      } else {
+        auctionBox.style.display = "none";
+      }
     });
 
-  /* ================= AUCTION UI ================= */
-
-  function handleAuctionUI() {
-    const auctionBox = document.getElementById("auctionBox");
-
-    if (auctionMode === "ON") {
-      auctionBox.style.display = "block";
-    } else {
-      auctionBox.style.display = "none";
-    }
-  }
-
-  /* ================= MODAL CONTROLS ================= */
+  /* ================= MODAL ================= */
 
   window.openReserve = () => openModal("RESERVE");
   window.openBid = () => openModal("BID");
 
   function openModal(type) {
-    document.getElementById("auctionModal").style.display = "flex";
-    document.getElementById("modalTitle").innerText =
+    auctionModal.style.display = "flex";
+    modalTitle.innerText =
       type === "RESERVE" ? "Reserve Vehicle" : "Place Bid";
 
-    document.getElementById("amount").style.display =
-      type === "BID" ? "block" : "none";
-
-    document.getElementById("auctionModal").dataset.action = type;
+    amount.style.display = type === "BID" ? "block" : "none";
+    auctionModal.dataset.action = type;
   }
 
   window.closeModal = () => {
-    document.getElementById("auctionModal").style.display = "none";
+    auctionModal.style.display = "none";
   };
 
-  /* ================= SUBMIT (RESERVE / BID) ================= */
+  /* ================= SUBMIT ================= */
 
   window.submitAuction = () => {
-    const manager = document.getElementById("managerSelect").value;
-    const action  = document.getElementById("auctionModal").dataset.action;
-    const bid     = document.getElementById("amount").value;
+    const manager = managerSelect.value;
+    const action = auctionModal.dataset.action;
+    const bid = amount.value;
 
     if (!manager) {
       alert("Please select your name");
@@ -133,23 +101,24 @@ document.addEventListener("DOMContentLoaded", () => {
         vehicle_name: vehicle.make,
         manager: manager,
         action: action,
-        bid_amount: bid || ""
+        bid_amount: bid || vehicle.bid_amount || ""
       })
     })
       .then(() => {
         alert("Submitted successfully");
         closeModal();
+        location.reload(); // refresh to show updated state
       })
       .catch(() => {
         alert("Submission failed. Please try again.");
       });
   };
 
-  /* ================= IMAGE CONTROLS ================= */
+  /* ================= IMAGE ================= */
 
   window.showImage = i => {
     currentIndex = i;
-    document.getElementById("mainImage").src = images[currentIndex];
+    mainImage.src = images[currentIndex];
   };
 
   window.nextImg = () =>
@@ -161,13 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ================= ZOOM ================= */
 
   window.openZoom = () => {
-    document.getElementById("zoomImg").src =
-      document.getElementById("mainImage").src;
-    document.getElementById("zoomModal").style.display = "flex";
+    zoomImg.src = mainImage.src;
+    zoomModal.style.display = "flex";
   };
 
   window.closeZoom = () => {
-    document.getElementById("zoomModal").style.display = "none";
+    zoomModal.style.display = "none";
   };
 
 });
