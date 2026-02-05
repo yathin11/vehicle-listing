@@ -11,6 +11,11 @@ body {
   color: #333;
 }
 
+#contact {
+  color: red;
+  font-weight: 700;
+}
+
 /* ================= TOP BAR ================= */
 .top-bar {
   background: #0f172a;
@@ -242,19 +247,6 @@ body {
   }
 }
 
-/* ================= PRINT ================= */
-@media print {
-  .top-bar,
-  .nav,
-  .print-btn,
-  .search-bar {
-    display: none;
-  }
-
-  body {
-    background: #fff;
-  }
-}
 
 /* ================= PRINT ONLY ================= */
 @media print {
@@ -338,9 +330,4 @@ body {
     font-size: 26px;
     color: #dc2626;
   }
-}
-
-#contact {
-  color: red;
-  font-weight: 700;
 }
