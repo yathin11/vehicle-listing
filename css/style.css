@@ -262,26 +262,86 @@ body {
   }
 }
 
-/* ===== PRINT SALE TITLE ===== */
+/* ================= PRINT ONLY ================= */
 @media print {
 
+  /* PAGE SAFE MARGINS */
+  @page {
+    margin: 15mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  /* HIDE UNWANTED */
+  .nav,
+  .print-btn,
+  .search-bar,
+  .back-btn {
+    display: none !important;
+  }
+
+  /* SHOW TOP BAR AS TITLE */
   .top-bar {
     display: block !important;
     background: none;
-    color: #000;
-    text-align: center;
     padding: 0;
-    margin-bottom: 20px;
-  }
-
-  .back-btn {
-    display: none;
-  }
-
-  .sale-title {
-    font-size: 24px;
-    font-weight: 800;
+    margin-top: 20px;   /* prevents top cut */
+    margin-bottom: 25px;
     text-align: center;
-    margin: 20px 0;
+  }
+
+  /* SALE / COMPANY NAME */
+  .sale-title {
+    font-size: 32px;     /* increased */
+    font-weight: 800;
+    color: #b91c1c;      /* change color */
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  /* MAIN LAYOUT → STACK */
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  /* IMAGE BIGGER */
+  .image-section {
+    height: 420px;       /* increased image size */
+    border-radius: 0;
+  }
+
+  .image-section img {
+    object-fit: contain;
+  }
+
+  /* DETAILS BELOW IMAGE */
+  .details-box {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .details-box h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .info-grid p {
+    font-size: 15px;
+  }
+
+  .price-big {
+    font-size: 26px;
+    color: #dc2626;
   }
 }

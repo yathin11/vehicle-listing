@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ================= CONFIG ================= */
 
   const SHEET_URL =
     "https://opensheet.elk.sh/1eXfETDikq3Q4addN_0OugOBjkOu_L3VXrUDO_oXt9Qo/Sheet1";
@@ -8,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const APPS_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbxrNkC8p-GRp45Ulccfsga-cN0dTHV95k_Fl70O70qYPwUoJdaInL12mcRrs6STugbW/exec";
 
-  /* ================= STATE ================= */
 
   const id = new URLSearchParams(window.location.search).get("id");
 
@@ -17,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
   let auctionMode = "OFF";
 
-  /* ================= FETCH DATA ================= */
 
   fetch(SHEET_URL)
     .then(res => res.json())
@@ -28,11 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       auctionMode = (vehicle.auction_mode || "OFF").toUpperCase();
 
-      /* ---------- SALE TITLE ---------- */
       const saleTitle = data[0]?.sale_title || "";
       document.getElementById("saleTitle").innerText = saleTitle;
 
-      /* ---------- IMAGES ---------- */
       images = [
         vehicle.img1,
         vehicle.img2,
@@ -43,10 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (images.length) showImage(0);
 
-      /* ---------- TITLE ---------- */
       document.getElementById("title").innerText = vehicle.make;
 
-      /* ---------- LEFT COLUMN ---------- */
       regno.innerText = vehicle.id;
       owners.innerText = vehicle.owners;
       fuel.innerText = vehicle.fuel;
@@ -54,18 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
       sale_code.innerText = vehicle.sale_code;
       price.innerText = vehicle.sale_price;
 
-      /* ---------- RIGHT COLUMN ---------- */
       model.innerText = vehicle.model;
       ic.innerText = vehicle.ic;
       fc.innerText = vehicle.fc;
       tax.innerText = vehicle.tax;
       contact.innerText = vehicle.contact;
 
-      /* ---------- AUCTION UI ---------- */
       handleAuctionUI();
     });
 
-  /* ================= AUCTION UI ================= */
 
   function handleAuctionUI() {
     const reserveBtn = document.getElementById("reserveBtn");
@@ -88,7 +78,6 @@ if (auctionMode === "ON") {
 
   }
 
-  /* ================= MODAL ================= */
 
   window.openReserve = () => openModal("RESERVE");
   window.openBid = () => openModal("BID");
@@ -106,7 +95,6 @@ if (auctionMode === "ON") {
     auctionModal.style.display = "none";
   };
 
-  /* ================= SUBMIT ================= */
 
   window.submitAuction = () => {
     const manager = managerSelect.value;
@@ -144,7 +132,6 @@ if (auctionMode === "ON") {
       });
   };
 
-  /* ================= IMAGE ================= */
 
   window.showImage = i => {
     currentIndex = i;
