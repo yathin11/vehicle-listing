@@ -52,7 +52,6 @@ body {
   border-color: #0f172a;
 }
 
-/* ================= LIST PAGE ================= */
 .container {
   padding: 20px;
   display: grid;
@@ -100,7 +99,6 @@ body {
   margin-top: 4px;
 }
 
-/* ================= DETAILS PAGE ================= */
 .details-container {
   padding: 20px;
   display: grid;
@@ -108,7 +106,6 @@ body {
   gap: 30px;
 }
 
-/* IMAGE CAROUSEL */
 .image-section {
   position: relative;
   height: 360px;
@@ -188,7 +185,6 @@ body {
   opacity: 0.9;
 }
 
-/* ================= AUCTION MODAL ================= */
 .modal {
   position: fixed;
   inset: 0;
@@ -216,7 +212,6 @@ body {
   border: 1px solid #d1d5db;
 }
 
-/* ================= ZOOM ================= */
 #zoomModal {
   display: none;
   position: fixed;
@@ -233,7 +228,6 @@ body {
   cursor: zoom-out;
 }
 
-/* ================= MOBILE ================= */
 @media (max-width: 768px) {
   .details-container {
     grid-template-columns: 1fr;
@@ -344,4 +338,9 @@ body {
     font-size: 26px;
     color: #dc2626;
   }
+}
+
+#contact {
+  color: red;
+  font-weight: 700;
 }
