@@ -247,10 +247,9 @@ body {
   }
 }
 
-
 @media print {
 
-  /* PAGE SAFE MARGINS */
+  /* PAGE */
   @page {
     margin: 15mm;
   }
@@ -259,7 +258,7 @@ body {
     background: #fff;
   }
 
-  /* HIDE UNWANTED */
+  /* HIDE UI */
   .nav,
   .print-btn,
   .search-bar,
@@ -267,26 +266,23 @@ body {
     display: none !important;
   }
 
-  /* SHOW TOP BAR AS TITLE */
+  /* HEADER */
   .top-bar {
     display: block !important;
     background: none;
     padding: 0;
-    margin-top: 20px;   /* prevents top cut */
-    margin-bottom: 25px;
+    margin: 20px 0 25px;
     text-align: center;
   }
 
-  /* SALE / COMPANY NAME */
   .sale-title {
-    font-size: 32px;     /* increased */
+    font-size: 32px;
     font-weight: 800;
-    color: #b91c1c;      /* change color */
-    margin-top: 20px;
+    color: #b91c1c;
     margin-bottom: 10px;
   }
 
-  /* MAIN LAYOUT → STACK */
+  /* STACK LAYOUT */
   .details-container {
     display: flex;
     flex-direction: column;
@@ -294,9 +290,9 @@ body {
     padding: 0;
   }
 
-  /* IMAGE BIGGER */
+  /* IMAGE */
   .image-section {
-    height: 420px;      
+    height: 420px;
     border-radius: 0;
   }
 
@@ -304,29 +300,35 @@ body {
     object-fit: contain;
   }
 
-  /* DETAILS BELOW IMAGE */
+  /* DETAILS BLOCK (CENTERED AS A UNIT) */
   .details-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
     box-shadow: none;
     border-radius: 0;
-    padding: 0;
   }
 
+  /* VEHICLE NAME */
   .details-box h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 18px;
   }
 
+  /* DETAILS GRID (LEFT-ALIGNED TEXT) */
   .info-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    column-gap: 30px;
+    row-gap: 6px;
+    text-align: left;
   }
 
   .info-grid p {
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
-  .price-big {
-    font-size: 26px;
-    color: #dc2626;
-  }
+
 }
